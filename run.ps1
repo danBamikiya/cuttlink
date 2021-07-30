@@ -36,7 +36,7 @@ function Rebuild-Image {
     if (-Not $Args[0]) {
         Write-Host "Specify the container name." -f yellow
     } else {
-        Write-Host "Rebuilding $($Args[0]) service...`n" -f blue
+        Write-Host "Rebuilding and starting $($Args[0]) service...`n" -f blue
         docker-compose up --build $Args[0] -d --no-deps
         docker-compose logs -f
     }
@@ -48,7 +48,7 @@ function List-Services {
 }
 
 function Build-Services {
-    Write-Host "Creating cuttlink production services...`n" -f blue
+    Write-Host "Creating and starting cuttlink production services...`n" -f blue
     docker-compose build
     docker-compose up -f docker-compose.yml docker-compose.prod.yml -d
     docker-compose logs -f

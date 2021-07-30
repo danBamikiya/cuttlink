@@ -23,12 +23,12 @@ teardown_services() {
 }
 
 stop_container() {
-    if [[ -z "$1" ]]; then
-        printf "${BYELLOW}Specify the container name.${NC}"
+    if [ -z "$1" ]; then
+        printf "${BYELLOW}Specify the container name.${NC}\n"
     else
         printf "${BYELLOW}Stopping $1 service...${NC}\n\n"
         docker container stop $1
-        if [[ ! -z "$2" ]] && [[ "$(echo $2 | sed 's/RM=//')" == "true" ]]; then
+        if [ ! -z "$2" ] && [ "$(echo $2 | sed 's/RM=//')" = "true" ]; then
             printf "${BYELLOW}Removing $1 service...${NC}\n\n"
             docker container rm $1
         fi
@@ -36,11 +36,11 @@ stop_container() {
 }
 
 rebuild_image() {
-    if [[ -z "$1" ]]; then
-        printf "${BYELLOW}Specify the container name.${NC}"
+    if [ -z "$1" ]; then
+        printf "${BYELLOW}Specify the container name.${NC}\n"
     else
-        printf "${BBLUE}Rebuilding $1 service...${NC}\n\n"
-        docker-compose up --build $1 -d --no-deps
+        printf "${BBLUE}Rebuilding and starting $1 service...${NC}\n\n"
+        docker-compose up --build -d --no-deps $1
         docker-compose logs -f
     fi
 }
@@ -51,7 +51,7 @@ list_services() {
 }
 
 build_services() {
-    printf "${BBLUE}Creating cuttlink production services...${NC}\n\n"
+    printf "${BBLUE}Creating and starting cuttlink production services...${NC}\n\n"
     docker-compose build
     docker-compose up -f docker-compose.yml docker-compose.prod.yml -d
     docker-compose logs -f
@@ -87,7 +87,7 @@ build)
     exit
     ;;
 *)
-    if [[ ! -z "$1" ]]; then
+    if [ ! -z "$1" ]; then
         echo -e "${CYAN}$1${NC} ${RED}is not a supported command.${NC}"
     else
         echo -e "${RED}Please specify a command.${NC}"

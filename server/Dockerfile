@@ -3,21 +3,21 @@ FROM node:14-slim AS server-dev
 
 WORKDIR /app
 
-# create a non-root user 'owner'
-RUN useradd -r -u 1001 -g root owner
+# create a non-root user 'cuttlink'
+RUN useradd -r -u 888 -g root -m cuttlink -c "Non-root user"
 
-# make non-root user 'owner' the owner of WORKDIR
-RUN chown -R owner:root /app
+# make non-root user 'cuttlink' the owner of WORKDIR
+RUN chown -R cuttlink:root /app
 
-COPY --chown=owner:root ./package*.json ./
+COPY --chown=cuttlink:root ./package*.json ./
 
 RUN npm i
 
-COPY --chown=owner:root . .
+COPY --chown=cuttlink:root . .
 
 EXPOSE 3000
 
-USER owner
+USER cuttlink
 
 ENV NODE_ENV development
 

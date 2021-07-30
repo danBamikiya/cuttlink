@@ -3,21 +3,14 @@ FROM node:14-slim AS server-dev
 
 WORKDIR /app
 
-# create a non-root user 'cuttlink'
-RUN useradd -r -u 888 -g root -m cuttlink -c "Non-root user"
-
-# make non-root user 'cuttlink' the owner of WORKDIR
-RUN chown -R cuttlink:root /app
-
-COPY --chown=cuttlink:root ./package*.json ./
+COPY ./package*.json ./
 
 RUN npm i
 
-COPY --chown=cuttlink:root . .
+COPY . .
 
 EXPOSE 3000
 
-USER cuttlink
 
 ENV NODE_ENV development
 

@@ -1,0 +1,310 @@
+section.shortener {
+  margin-bottom: 3rem;
+}
+
+section div.shortener-bar {
+  height: 56px;
+  background: #fff3e0;
+  border: 1px solid #e65100;
+  border-radius: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+section div.shortener-bar.confirm-copy {
+  border-color: #71d675;
+  border-width: 3px;
+}
+
+section div.shortener-bar > div {
+  display: inline-flex;
+  padding: 0.5rem 0.6rem 0.5rem 0.8rem;
+  width: 40%;
+  margin-left: 0.5rem;
+  position: relative;
+}
+
+section div.shortener-bar > div::after {
+  content: "";
+  height: 122%;
+  border-right: 1px solid #e65100;
+  width: 1px;
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+}
+
+input:invalid {
+  box-shadow: 0 0 3px red;
+}
+
+input:required {
+  box-shadow: none;
+}
+
+section div.shortener-bar > div > .link-cut {
+  cursor: context-menu;
+}
+
+section div.shortener-bar > div > .link-clear {
+  cursor: pointer;
+  position: relative;
+}
+
+section div.shortener-bar > div > .link-clear::before,
+section div.shortener-bar > div.fields-reset > div::before,
+section div.shortener-bar > div > .link-cut::after {
+  position: absolute;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  width: 3rem;
+  height: 1.5rem;
+  padding: 0 0.3rem;
+  text-align: center;
+  display: none;
+}
+
+section div.shortener-bar > div > .link-cut::after {
+  content: "Shorten";
+  width: 4.5rem;
+  top: 100%;
+  left: -4%;
+}
+
+section div.shortener-bar > div > .link-clear::before {
+  content: "Clear";
+  top: 128%;
+  left: -50%;
+}
+
+section div.shortener-bar > div.fields-reset > div::before {
+  content: "Reset";
+  top: 100%;
+  left: 40%;
+}
+
+section div.shortener-bar > div > .link-clear:hover:before,
+section div.shortener-bar > div.fields-reset > div:hover::before,
+section div.shortener-bar > div > .link-cut:hover:after {
+  display: block;
+}
+
+section div.shortener-bar > div > .link-clear::after,
+section div.shortener-bar > div.fields-reset > div::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(95, 99, 104, 0.12);
+  width: 35px;
+  height: 35px;
+  top: 50%;
+  left: 50%;
+  display: none;
+}
+
+section div.shortener-bar > div > .link-clear::after {
+  transform: translate(-51%, -60%);
+}
+
+section div.shortener-bar > div.fields-reset > div::after {
+  transform: translate(-3%, -55%);
+}
+
+section div.shortener-bar > div > .link-clear:hover::after,
+section div.shortener-bar > div.fields-reset > div:hover:after {
+  display: block;
+}
+
+section div.shortener-bar > div > input[type="text"] {
+  border: none;
+  flex-grow: 1;
+  margin: 0 0.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 0.4rem 0.3rem;
+  outline: none;
+  font-family: "Roboto Mono";
+  font-size: 1rem;
+  font-weight: 300;
+  background: transparent;
+}
+
+section div.shortener-bar > div:nth-child(2) {
+  padding-left: 0.3rem;
+  padding-bottom: 0.8rem;
+}
+
+section div.shortener-bar > div:nth-child(2)::after {
+  display: none;
+}
+
+section div.shortener-bar > div:nth-child(2) > p {
+  margin-right: 0.5rem;
+  color: #777;
+  font-family: "Roboto Mono";
+  font-weight: 300;
+}
+
+section div.shortener-bar > div:nth-child(2) > div {
+  margin-left: 0.6rem;
+}
+
+section div.shortener-bar > div:nth-child(2) > div > a {
+  color: #e65100;
+}
+
+section div.shortener-bar > div.fields-reset > div,
+section div.shortener-bar > div.link-copy {
+  cursor: pointer;
+}
+
+section div.shortener-bar > div.link-copy {
+  width: 8%;
+  height: 90%;
+  justify-content: center;
+  margin-left: 0;
+  padding-left: 0.6rem;
+  padding-bottom: 0rem;
+  padding-top: 0.2rem;
+  box-shadow: 0 3px 0 0 #e65100;
+  margin-bottom: 0.3%;
+  margin-left: 0.6rem;
+  user-select: none;
+  border-right: 3px solid #e65100;
+  border-left: 3px solid #e65100;
+  box-sizing: content-box;
+}
+
+section div.shortener-bar > div.link-copy.link-copy-success {
+  box-shadow: 0 3px 0 0 #71d675;
+  border-color: #71d675;
+}
+
+section div.shortener-bar > div.link-copy::after {
+  display: none;
+}
+
+.link-copy > p {
+  transform: translateY(0.3rem);
+}
+
+section div.shortener-bar > div.link-copy.link-copy-effect {
+  margin-bottom: 0%;
+  height: 95%;
+  border-right-width: 1px;
+  border-left-width: 1px;
+  box-shadow: none;
+}
+
+.link-copy-effect > p {
+  transform: translateY(0.5rem);
+}
+
+section div.shortener-bar > div.fields-reset {
+  width: 10%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+section div.shortener-bar > div.fields-reset::after {
+  display: none;
+}
+
+section div.shortener-bar > div.fields-reset > div {
+  margin-right: 1rem;
+}
+
+section div.shortener-bar > div.fields-reset > div > .mat-icon {
+  vertical-align: bottom;
+}
+
+section p.privacy-info {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 0.6rem;
+  color: #e65100;
+}
+
+section p.privacy-info > span.privacy-policy {
+  position: relative;
+}
+
+section p.privacy-info > span.privacy-policy > span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+section p.privacy-info > span.privacy-policy > span:hover,
+section p.privacy-info > span.privacy-policy > span:focus {
+  color: #fa8647;
+}
+
+section
+  p.privacy-info
+  > span.privacy-policy
+  > span:focus
+  + div.privacy-policy-info {
+  transform: scale(1);
+}
+
+section
+  p.privacy-info
+  > span.privacy-policy
+  > span
+  + div.privacy-policy-info.read-privacy-policy-info {
+  transform: scale(1);
+}
+
+section p.privacy-info > span.privacy-policy > div.privacy-policy-info {
+  position: absolute;
+  text-decoration: none;
+  cursor: text;
+  color: #777;
+  background-color: white;
+  border-radius: 6px;
+  height: 50vh;
+  bottom: 2.4rem;
+  left: -24rem;
+  padding: 1rem;
+  box-shadow: 0px 15px 25px -5px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 1rem;
+  transform: scale(0);
+  transform-origin: bottom;
+  transition: transform 0.1s ease-out;
+}
+
+section p.privacy-info > span.privacy-policy > div.privacy-policy-info p {
+  margin: 00.4rem 0.3rem;
+}
+
+div.privacy-policy-info > .privacy-policy-info-close {
+  position: absolute;
+  right: 1rem;
+  margin-right: 0.2rem;
+  transform: scale(1.3);
+  cursor: context-menu;
+}
+
+div.privacy-policy-info > h2,
+div.privacy-policy-info > h3 {
+  color: #333;
+}
+
+div.privacy-policy-info > h3 {
+  margin-top: 1rem;
+}
+
+div.privacy-policy-info > h2:nth-of-type(1) {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 1.5rem;
+}
+
+div.privacy-policy-info > h2:nth-of-type(2) {
+  margin-top: 2rem;
+}

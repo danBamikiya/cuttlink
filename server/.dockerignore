@@ -1,0 +1,8 @@
+node_modules/
+build/
+src/config/local.json
+src/config/production.json
+.gitignore
+.eslintrc
+.prettierrc
+*.md

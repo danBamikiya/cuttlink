@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  angular:
+    build:
+      context: web
+      target: ui-dev
+    ports:
+      - 4200:4200
+    networks:
+      - public
+    depends_on:
+      - express
+    volumes:
+      - ./web/:/app
+      - webnodemodules:/app/node_modules
+    container_name: cuttlink_web
+
+  express:
+    build:
+      context: server
+      target: server-dev
+    ports:
+      - 3000:3000
+    networks:
+      - public
+    depends_on:
+      - cacher
+    volumes:
+      - ./server/:/app
+      - servernodemodules:/app/node_modules
+    container_name: cuttlink_server
+
+  cacher:
+    image: redis
+    env_file:
+      - ./config/redis.env
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    ports:
+      - 6379:6379
+    networks:
+      - public
+    volumes:
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf
+      - redisdata:/data
+    container_name: cache
+
+networks:
+  public:
+    driver: bridge
+
+volumes:
+  servernodemodules: {}
+  webnodemodules: {}
+  redisdata: {}

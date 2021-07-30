@@ -1,0 +1,89 @@
+<section class="shortener">
+  <div [ngClass]="confirmCopy()">
+    <div>
+      <div class="link-cut"><mat-icon>content_cut</mat-icon></div>
+      <input
+        type="text"
+        name="title"
+        [(ngModel)]="longURL"
+        placeholder="Shorten your link..."
+        required
+      />
+      <div class="link-clear" (click)="handleLongURLClear()">
+        <mat-icon>clear</mat-icon>
+      </div>
+    </div>
+    <div>
+      <p class="shortened">Shortened</p>
+      <div>
+        <a>{{ shortURL }}</a>
+      </div>
+    </div>
+    <div
+      class="link-copy"
+      #copyBtn
+      (mousedown)="handleCopyToClipboardEffect()"
+      (mouseup)="handleCopyToClipboardEffectRemove()"
+      [ngClass]="copiedMsgSuccess()"
+    >
+      <ng-container *ngIf="urlCopied; else copyMsg">
+        <p>Copied</p>
+      </ng-container>
+      <ng-template #copyMsg>
+        <p
+          (cbOnSuccess)="copyToClipboard($event)"
+          ngxClipboard
+          [cbContent]="shortURL"
+        >
+          Copy
+        </p>
+      </ng-template>
+    </div>
+    <div class="fields-reset" (click)="refreshBar()">
+      <div><mat-icon>refresh</mat-icon></div>
+    </div>
+  </div>
+  <p class="privacy-info">
+    By clicking SHORTEN, you are agreeing to URLy’s
+    <span class="privacy-policy">
+      <span (click)="onTogglePrivacyPolicy()">Privacy Policy</span>
+      <div class="privacy-policy-info" [ngClass]="setClass()">
+        <div
+          class="privacy-policy-info-close"
+          (click)="onTogglePrivacyPolicy()"
+        >
+          <mat-icon>clear</mat-icon>
+        </div>
+        <h2>URLy Privacy Policy</h2>
+        <p>
+          Welcome to URLy. This Privacy Policy describes the policies and
+          procedures of URLy (URLy, “we” or “us”) and on the services or
+          features, offered by URLy.
+        </p>
+        <h2>Information We Collect</h2>
+        <h3>When You Register for a URLy Account</h3>
+        <p>
+          When you create an Account, we collect information from you, such as
+          your name and also store the date and time you created an account with
+          us.
+        </p>
+        <h3>When You Create a URLy Link</h3>
+        <p>
+          URLy has the ability to create shortened uniform resource locators
+          (URLs) of websites (URLy Links”).
+        </p>
+        <p>
+          Users can create URLy Links without registering for an account. When
+          you create a URLy Link, URLy collects and stores both the original URL
+          and the shortened URL if you are logged in to your Account and we will
+          associate that information with your Account.
+        </p>
+        <p>
+          URLy also collects and stores the time and date on which you shortened
+          the original URL and stores the history of the links you've
+          shortened(both long link and short link) for logged in users.
+        </p>
+      </div>
+    </span>
+  </p>
+</section>

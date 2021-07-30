@@ -1,0 +1,13 @@
+{
+    "watch": [
+        "package.json",
+        "nodemon.json",
+        ".eslintrc.json",
+        "tsconfig.json",
+        "src/",
+        ".env"
+    ],
+    "ext": "ts, json",
+    "exec": "tsc -p ./ && node build/server",
+    "verbose": true
+}

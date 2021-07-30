@@ -1,0 +1,4 @@
+node_modules
+src/config/local.json
+src/config/production.json
+build/

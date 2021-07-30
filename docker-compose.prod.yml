@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  angular:
+    build:
+      context: web
+      target: ui-build
+    restart: always
+
+    express:
+      build:
+        context: server
+        target: server-build
+      restart: always

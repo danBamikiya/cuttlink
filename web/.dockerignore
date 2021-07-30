@@ -1,0 +1,10 @@
+node_modules/
+dist/
+tmp/
+out-tsc/
+.gitignore
+.editorconfig
+.prettierrc
+.eslintignore
+.eslintrc
+*.md

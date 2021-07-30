@@ -1,7 +1,7 @@
 # Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 function Start-Services {
     Write-Host "Starting cuttlink development services...`n" -f blue
-    docker-compose up -d --build
+    docker-compose up -d
     docker-compose logs -f
 }
 

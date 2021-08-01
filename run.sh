@@ -70,6 +70,16 @@ pause() {
     fi
 }
 
+exec_into() {
+    if [ -z "$1" ]; then
+        printf "${BYELLOW}Specify at least the container name you want to run the command on.${NC}\n\n"
+        printf "${BYELLOW}Example:${NC} ./run.sh exec_into ${CYAN}cuttlink_server${NC}\n"
+    else
+        printf "${BYELLOW}Executing into the specified container...${NC}\n\n"
+        docker exec -it "$@" /usr/bin/env sh
+    fi
+}
+
 case $1 in
 ls)
     list_services
@@ -100,6 +110,10 @@ build)
     exit
     ;;
 pause)
+    "$@"
+    exit
+    ;;
+exec_into)
     "$@"
     exit
     ;;

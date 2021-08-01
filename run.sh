@@ -32,7 +32,7 @@ stop_service() {
         docker-compose stop $1
         if [ ! -z "$2" ] && [ "$(echo $2 | sed 's/RM=//')" = "true" ]; then
             printf "${BYELLOW}Removing $1 service...${NC}\n\n"
-            docker container rm $1
+            docker-compose rm -v --force $1
         fi
     fi
 }

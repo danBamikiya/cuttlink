@@ -43,7 +43,7 @@ rebuild_service() {
     else
         stop_service $1
         printf "${BBLUE}Rebuilding and starting $1 service...${NC}\n\n"
-        docker-compose up --build -d --no-deps $1
+        docker-compose up --build -d --no-deps --renew-anon-volumes $1
         docker-compose logs -f
     fi
 }

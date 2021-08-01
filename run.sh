@@ -37,10 +37,11 @@ stop_service() {
     fi
 }
 
-rebuild_image() {
+rebuild_service() {
     if [ -z "$1" ]; then
-        printf "${BYELLOW}Specify the container name.${NC}\n"
+        printf "${BYELLOW}Specify the service name.${NC}\n"
     else
+        stop_service $1
         printf "${BBLUE}Rebuilding and starting $1 service...${NC}\n\n"
         docker-compose up --build -d --no-deps $1
         docker-compose logs -f
@@ -80,7 +81,7 @@ stop_service)
     "$@"
     exit
     ;;
-rebuild_image)
+rebuild_service)
     "$@"
     exit
     ;;

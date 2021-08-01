@@ -60,6 +60,16 @@ build_services() {
     docker-compose logs -f
 }
 
+pause() {
+    if [ ! -z "$1" ]; then
+        printf "${BYELLOW}Pausing $1 service...${NC}\n\n"
+        docker-compose pause $1
+    else
+        printf "${BYELLOW}Pausing all services...${NC}\n\n"
+        docker-compose pause
+    fi
+}
+
 case $1 in
 ls)
     list_services
@@ -87,6 +97,10 @@ rebuild_service)
     ;;
 build)
     build_services
+    exit
+    ;;
+pause)
+    "$@"
     exit
     ;;
 *)

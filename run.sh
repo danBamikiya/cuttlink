@@ -24,12 +24,12 @@ teardown_services() {
     docker-compose down -v
 }
 
-stop_container() {
+stop_service() {
     if [ -z "$1" ]; then
-        printf "${BYELLOW}Specify the container name.${NC}\n"
+        printf "${BYELLOW}Specify the service name.${NC}\n"
     else
         printf "${BYELLOW}Stopping $1 service...${NC}\n\n"
-        docker container stop $1
+        docker-compose stop $1
         if [ ! -z "$2" ] && [ "$(echo $2 | sed 's/RM=//')" = "true" ]; then
             printf "${BYELLOW}Removing $1 service...${NC}\n\n"
             docker container rm $1
@@ -76,7 +76,7 @@ teardown)
     teardown_services
     exit
     ;;
-stop_container)
+stop_service)
     "$@"
     exit
     ;;

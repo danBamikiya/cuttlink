@@ -32,10 +32,11 @@ function Stop-Service {
     }
 }
 
-function Rebuild-Image {
+function Rebuild-Service {
     if (-Not $Args[0]) {
-        Write-Host "Specify the container name." -f yellow
+        Write-Host "Specify the service name." -f yellow
     } else {
+        Stop-Service $Args[0]
         Write-Host "Rebuilding and starting $($Args[0]) service...`n" -f blue
         docker-compose up --build $Args[0] -d --no-deps
         docker-compose logs -f
@@ -80,8 +81,8 @@ switch ($Args[0]) {
         }
         exit
     }
-    'Rebuild-Image' {
-        Rebuild-Image $($Args | Select-Object -Skip 1);
+    'Rebuild-Service' {
+        Rebuild-Service $($Args | Select-Object -Skip 1);
         exit
     }
     'Build' {

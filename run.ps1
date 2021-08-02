@@ -15,16 +15,16 @@ function Teardown-Services {
     docker-compose down -v
 }
 
-function Stop-Container {
+function Stop-Service {
     param(
         [switch]$RM = $false
     )
 
     if (-Not $Args[0]) {
-        Write-Host "Specify the container name." -f yellow
+        Write-Host "Specify the service name." -f yellow
     } else {
         Write-Host "Stopping $($Args[0]) service...`n" -f yellow
-        docker container stop $Args[0]
+        docker-compose stop $Args[0]
         if ($RM) {
             Write-Host "Removing $($Args[0]) service...`n" -f yellow
             docker container rm $Args[0]
@@ -71,7 +71,7 @@ switch ($Args[0]) {
         Teardown-Services;
         exit
     }
-    'Stop-Container' {
+    'Stop-Service' {
         Invoke-Expression "$($Args)"
         exit
     }

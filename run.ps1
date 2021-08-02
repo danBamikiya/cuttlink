@@ -55,6 +55,16 @@ function Build-Services {
     docker-compose logs -f
 }
 
+function Pause-Services {
+    if ($($Args[0]).Length -ne 0) {
+        Write-Host "Pausing $($Args[0]) service...`n" -f yellow
+        docker-compose pause $Args[0]
+    } else {
+        Write-Host "Pausing all services...`n" -f yellow
+        docker-compose pause
+    }
+}
+
 switch ($Args[0]) {
     'LS' {
         List-Services;
@@ -87,6 +97,10 @@ switch ($Args[0]) {
     }
     'Build' {
         Build-Services;
+        exit
+    }
+    'Pause' {
+        Pause-Services $($Args | Select-Object -Skip 1);
         exit
     }
     Default {

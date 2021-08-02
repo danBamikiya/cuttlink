@@ -1,4 +1,4 @@
-# 🦔 urly backend
+# 🦔 cuttlink backend
 
 ### 📚 Stack
 
@@ -6,13 +6,13 @@ I tried to keep the backend stack as lean and precise as possible while being ro
 
 The most important technologies / dependencies:
 
--   Typescript
--   Express
--   GraphQL
--   Postgraphile
--   Redis
--   Winston
--   Sentry
+- Typescript
+- Express
+- GraphQL
+- Postgraphile
+- Redis
+- Winston
+- Sentry
 
 ---
 
@@ -22,8 +22,8 @@ _[API documentation](API_DOC.md)_
 
 #### /api
 
--   POST _/api/url_
+- POST _/api/url_
 
 #### /url
 
--   GET _/:url_
+- GET _/:url_

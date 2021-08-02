@@ -1,78 +1,88 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
+import { ShortenerService } from '../../services/shortener.service'
 
 @Component({
   selector: 'app-shortener',
   templateUrl: './shortener.component.html',
-  styleUrls: ['./shortener.component.css'],
+  styleUrls: ['./shortener.component.css']
 })
 export class ShortenerComponent implements OnInit {
-  longURL!: string;
-  shortURL!: string;
-  isClick!: boolean;
-  urlCopied!: boolean;
-  @ViewChild('copyBtn') copyBtn!: ElementRef; // accessing the reference copyBtn element
+  longURL!: string
+  shortURL!: string | undefined
+  isClick!: boolean
+  urlCopied!: boolean
+  @ViewChild('copyBtn') copyBtn!: ElementRef // accessing the reference copyBtn element
 
-  constructor() {}
+  constructor(private shortenService: ShortenerService) {}
 
   ngOnInit(): void {
-    this.isClick = false;
-    this.urlCopied = false;
+    this.isClick = false
+    this.urlCopied = false
   }
 
   // Show Privacy Policy
   setClass() {
     return {
-      'read-privacy-policy-info': this.isClick,
-    };
+      'read-privacy-policy-info': this.isClick
+    }
   }
 
   // Toggle Privacy Policy
   onTogglePrivacyPolicy(): void {
-    this.isClick = !this.isClick;
+    this.isClick = !this.isClick
+  }
+
+  // Send Long Url To Server
+  shortenLongUrl(): void {
+    const data = { url: this.longURL }
+    this.shortenService.shortenUrl(data).subscribe(response => {
+      this.shortURL = response.message.redirect_url
+      console.log(response)
+    })
   }
 
   // Clear Long URL Input Field
   handleLongURLClear(): void {
-    this.longURL = '';
+    this.longURL = ''
   }
 
   // Copy To Clipboard
   copyToClipboard(e: { isSuccess: boolean }): void {
     setTimeout(() => {
-      this.urlCopied = e.isSuccess;
-    }, 70);
+      this.urlCopied = e.isSuccess
+    }, 70)
 
     setTimeout(() => {
-      this.urlCopied = false;
-    }, 1500);
+      this.urlCopied = false
+    }, 1500)
   }
 
   // Copy To Clipboard Effect
   handleCopyToClipboardEffect(): void {
-    this.copyBtn.nativeElement.classList.add('link-copy-effect');
+    this.copyBtn.nativeElement.classList.add('link-copy-effect')
   }
   handleCopyToClipboardEffectRemove(): void {
-    this.copyBtn.nativeElement.classList.remove('link-copy-effect');
+    this.copyBtn.nativeElement.classList.remove('link-copy-effect')
   }
 
   // Show Copy Success On Copy Btn
   copiedMsgSuccess() {
     return {
-      'link-copy-success': this.urlCopied,
-    };
+      'link-copy-success': this.urlCopied
+    }
   }
 
   // Confirm Copy
   confirmCopy() {
     return {
       'shortener-bar': true,
-      'confirm-copy': this.urlCopied,
-    };
+      'confirm-copy': this.urlCopied
+    }
   }
 
   // Refresh Shortening Bar Fields
   refreshBar(): void {
-    this.longURL = '';
-    this.shortURL = '';
+    this.longURL = ''
+    this.shortURL = ''
   }
 }

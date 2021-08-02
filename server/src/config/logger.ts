@@ -1,12 +1,13 @@
 import winston from 'winston'
 import Sentry from 'winston-transport-sentry-node'
 import { SENTRY_DSN } from './common'
+import logLevel from '../utils/logLevel'
 
 const logger = winston.createLogger({
-  level: 'debug',
+  level: logLevel(),
   format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.json()
+    winston.format.json(),
+    winston.format.colorize()
   ),
   transports: [
     new winston.transports.Console({ handleExceptions: true }),

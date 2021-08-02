@@ -72,7 +72,12 @@ switch ($Args[0]) {
         exit
     }
     'Stop-Service' {
-        Invoke-Expression "$($Args)"
+        if ($($Args | Select-Object -Skip 1).Count -gt 2) {
+            Write-Error -Message "This command requires not more than 2 arguments." -Category InvalidArgument
+            Write-Host "Please set the correct number of arguments and try again." -f yellow
+        } else {
+            Invoke-Expression "$($Args)"
+        }
         exit
     }
     'Rebuild-Image' {

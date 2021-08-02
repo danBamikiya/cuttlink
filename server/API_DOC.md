@@ -1,6 +1,6 @@
-<h1 align="center">URLy API</h1>
+<h1 align="center">Cuttlink API</h1>
 
-The base address of URLy API is http://localhost:3000/api/ (_will change when the product is hosted_).
+The base address of Cuttlink API is http://localhost:3000/api/ (_will change when the product is hosted_).
 
 ## Endpoints
 
@@ -8,15 +8,15 @@ _In-depth documentation currently in development_
 
 #### /api
 
--   POST _/api/url_
+- POST _/api/url_
 
 #### /url
 
--   GET _/:url_
+- GET _/:url_
 
 ## Requests
 
-The services are accessed via standard HTTPS requests in UTF-8 format to an API endpoint. Where possible, URLy API uses appropriate HTTP verbs for each action:
+The services are accessed via standard HTTPS requests in UTF-8 format to an API endpoint. Where possible, Cuttlink API uses appropriate HTTP verbs for each action:
 
 | METHOD | ACTION                   |
 | ------ | ------------------------ |
@@ -42,9 +42,9 @@ Web API uses the following response status codes, as defined in the [RFC 2616](h
 
 <h2 id="response-schema">Response Schema</h2>
 
-URLy API uses one format to describe errors:
+Cuttlink API uses one format to describe errors:
 
--   Regular Error Object
+- Regular Error Object
 
 ### Regular Error Object
 

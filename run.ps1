@@ -65,6 +65,18 @@ function Pause-Services {
     }
 }
 
+function Execute-Into {
+    if (-Not $Args[0]) {
+        Write-Host "Specify at least the container name you want to run the command on.`n" -f yellow
+        Write-Host "Example:" -f yellow -NoNewline
+        Write-Host " .\run.ps1 Exec-Into" -NoNewline
+        Write-Host " cuttlink_server" -f cyan
+    } else {
+        Write-Host "Executing into the specfied container service...`n" -f yellow
+        docker exec -it $Args /usr/bin/env sh
+    }
+}
+
 switch ($Args[0]) {
     'LS' {
         List-Services;
@@ -101,6 +113,10 @@ switch ($Args[0]) {
     }
     'Pause' {
         Pause-Services $($Args | Select-Object -Skip 1);
+        exit
+    }
+    'Exec-Into' {
+        Execute-Into $($Args | Select-Object -Skip 1);
         exit
     }
     Default {

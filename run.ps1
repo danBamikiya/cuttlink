@@ -38,7 +38,7 @@ function Rebuild-Service {
     } else {
         Stop-Service $Args[0]
         Write-Host "Rebuilding and starting $($Args[0]) service...`n" -f blue
-        docker-compose up --build $Args[0] -d --no-deps
+        docker-compose up --build -d --no-deps --renew-anon-volumes $Args[0]
         docker-compose logs -f
     }
 }

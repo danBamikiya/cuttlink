@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 RED="\033[0;31m"
 CYAN="\033[0;36m"
 BBLUE="\033[1;34m"
@@ -22,25 +24,26 @@ teardown_services() {
     docker-compose down -v
 }
 
-stop_container() {
+stop_service() {
     if [ -z "$1" ]; then
-        printf "${BYELLOW}Specify the container name.${NC}\n"
+        printf "${BYELLOW}Specify the service name.${NC}\n"
     else
         printf "${BYELLOW}Stopping $1 service...${NC}\n\n"
-        docker container stop $1
-        if [ ! -z "$2" ] && [ "$(echo $2 | sed 's/RM=//')" = "true" ]; then
+        docker-compose stop "$1"
+        if [ -n "$2" ] && [ "$(echo "$2" | sed 's/RM=//')" = "true" ]; then
             printf "${BYELLOW}Removing $1 service...${NC}\n\n"
-            docker container rm $1
+            docker-compose rm -v --force "$1"
         fi
     fi
 }
 
-rebuild_image() {
+rebuild_service() {
     if [ -z "$1" ]; then
-        printf "${BYELLOW}Specify the container name.${NC}\n"
+        printf "${BYELLOW}Specify the service name.${NC}\n"
     else
+        stop_service "$1"
         printf "${BBLUE}Rebuilding and starting $1 service...${NC}\n\n"
-        docker-compose up --build -d --no-deps $1
+        docker-compose up --build -d --no-deps --renew-anon-volumes "$1"
         docker-compose logs -f
     fi
 }
@@ -55,6 +58,26 @@ build_services() {
     docker-compose build
     docker-compose up -f docker-compose.yml docker-compose.prod.yml -d
     docker-compose logs -f
+}
+
+pause() {
+    if [ -n "$1" ]; then
+        printf "${BYELLOW}Pausing $1 service...${NC}\n\n"
+        docker-compose pause "$1"
+    else
+        printf "${BYELLOW}Pausing all services...${NC}\n\n"
+        docker-compose pause
+    fi
+}
+
+exec_into() {
+    if [ -z "$1" ]; then
+        printf "${BYELLOW}Specify at least the container name you want to run the command on.${NC}\n\n"
+        printf "${BYELLOW}Example:${NC} ./run.sh exec_into ${CYAN}cuttlink_server${NC}\n"
+    else
+        printf "${BYELLOW}Executing into the specified container...${NC}\n\n"
+        docker exec -it "$@" /usr/bin/env sh
+    fi
 }
 
 case $1 in
@@ -74,11 +97,11 @@ teardown)
     teardown_services
     exit
     ;;
-stop_container)
+stop_service)
     "$@"
     exit
     ;;
-rebuild_image)
+rebuild_service)
     "$@"
     exit
     ;;
@@ -86,11 +109,19 @@ build)
     build_services
     exit
     ;;
+pause)
+    "$@"
+    exit
+    ;;
+exec_into)
+    "$@"
+    exit
+    ;;
 *)
-    if [ ! -z "$1" ]; then
-        echo -e "${CYAN}$1${NC} ${RED}is not a supported command.${NC}"
+    if [ -n "$1" ]; then
+        echo "${CYAN}$1${NC} ${RED}is not a supported command.${NC}"
     else
-        echo -e "${RED}Please specify a command.${NC}"
+        echo "${RED}Please specify a command.${NC}"
     fi
     exit 1
     ;;

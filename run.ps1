@@ -15,29 +15,30 @@ function Teardown-Services {
     docker-compose down -v
 }
 
-function Stop-Container {
+function Stop-Service {
     param(
         [switch]$RM = $false
     )
 
     if (-Not $Args[0]) {
-        Write-Host "Specify the container name." -f yellow
+        Write-Host "Specify the service name." -f yellow
     } else {
         Write-Host "Stopping $($Args[0]) service...`n" -f yellow
-        docker container stop $Args[0]
+        docker-compose stop $Args[0]
         if ($RM) {
             Write-Host "Removing $($Args[0]) service...`n" -f yellow
-            docker container rm $Args[0]
+            docker-compose rm -v --force $Args[0]
         }
     }
 }
 
-function Rebuild-Image {
+function Rebuild-Service {
     if (-Not $Args[0]) {
-        Write-Host "Specify the container name." -f yellow
+        Write-Host "Specify the service name." -f yellow
     } else {
+        Stop-Service $Args[0]
         Write-Host "Rebuilding and starting $($Args[0]) service...`n" -f blue
-        docker-compose up --build $Args[0] -d --no-deps
+        docker-compose up --build -d --no-deps --renew-anon-volumes $Args[0]
         docker-compose logs -f
     }
 }
@@ -52,6 +53,28 @@ function Build-Services {
     docker-compose build
     docker-compose up -f docker-compose.yml docker-compose.prod.yml -d
     docker-compose logs -f
+}
+
+function Pause-Services {
+    if ($($Args[0]).Length -ne 0) {
+        Write-Host "Pausing $($Args[0]) service...`n" -f yellow
+        docker-compose pause $Args[0]
+    } else {
+        Write-Host "Pausing all services...`n" -f yellow
+        docker-compose pause
+    }
+}
+
+function Execute-Into {
+    if (-Not $Args[0]) {
+        Write-Host "Specify at least the container name you want to run the command on.`n" -f yellow
+        Write-Host "Example:" -f yellow -NoNewline
+        Write-Host " .\run.ps1 Exec-Into" -NoNewline
+        Write-Host " cuttlink_server" -f cyan
+    } else {
+        Write-Host "Executing into the specfied container service...`n" -f yellow
+        docker exec -it $Args /usr/bin/env sh
+    }
 }
 
 switch ($Args[0]) {
@@ -71,16 +94,29 @@ switch ($Args[0]) {
         Teardown-Services;
         exit
     }
-    'Stop-Container' {
-        Invoke-Expression "$($Args)"
+    'Stop-Service' {
+        if ($($Args | Select-Object -Skip 1).Count -gt 2) {
+            Write-Error -Message "This command requires not more than 2 arguments." -Category InvalidArgument
+            Write-Host "Please set the correct number of arguments and try again." -f yellow
+        } else {
+            Invoke-Expression "$($Args)"
+        }
         exit
     }
-    'Rebuild-Image' {
-        Rebuild-Image $($Args | Select-Object -Skip 1);
+    'Rebuild-Service' {
+        Rebuild-Service $($Args | Select-Object -Skip 1);
         exit
     }
     'Build' {
         Build-Services;
+        exit
+    }
+    'Pause' {
+        Pause-Services $($Args | Select-Object -Skip 1);
+        exit
+    }
+    'Exec-Into' {
+        Execute-Into $($Args | Select-Object -Skip 1);
         exit
     }
     Default {

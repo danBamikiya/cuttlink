@@ -3,21 +3,18 @@ FROM node:14-slim  AS ui-dev
 
 WORKDIR /app
 
-# create a non-root user 'cuttlink'
-RUN useradd -r -u 888 -g root -m cuttlink -c "Non-root user"
+# make non-root user 'node' the owner of WORKDIR
+RUN chown -R node:node /app
 
-# make non-root user 'cuttlink' the owner of WORKDIR
-RUN chown -R cuttlink:root /app
-
-COPY --chown=cuttlink:root ./package*.json ./
+COPY --chown=node:node ./package*.json ./
 
 RUN npm i @angular/cli && npm i
 
-COPY --chown=cuttlink:root . .
+COPY --chown=node:node . .
 
 EXPOSE 4200
 
-USER cuttlink
+USER node
 
 ENV NODE_ENV development
 

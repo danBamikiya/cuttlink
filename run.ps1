@@ -27,7 +27,7 @@ function Stop-Service {
         docker-compose stop $Args[0]
         if ($RM) {
             Write-Host "Removing $($Args[0]) service...`n" -f yellow
-            docker container rm $Args[0]
+            docker-compose rm -v --force $Args[0]
         }
     }
 }

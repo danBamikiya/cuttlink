@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
-};
+  production: false,
+  API_URL: 'https://3000-magenta-camel-dcys2luy.ws-eu13.gitpod.io/api/url'
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

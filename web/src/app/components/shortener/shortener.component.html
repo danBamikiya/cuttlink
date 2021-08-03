@@ -1,7 +1,9 @@
 <section class="shortener">
   <div [ngClass]="confirmCopy()">
     <div>
-      <div class="link-cut"><mat-icon>content_cut</mat-icon></div>
+      <div class="link-cut" (click)="shortenLongUrl()">
+        <mat-icon>content_cut</mat-icon>
+      </div>
       <input
         type="text"
         name="title"

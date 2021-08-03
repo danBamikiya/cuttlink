@@ -2,9 +2,10 @@
   "SERVER": {
     "HOST": "localhost",
     "PORT": "3000",
-    "BASE_URL": "http://localhost:3000"
+    "API_URL": "http://localhost:3000"
   },
-  "SENTRY_DSN": "SENTRY_DSN",
+  "BASE_URL": "http://localhost:3000",
+  "SENTRY_DSN": "",
   "REDIS": {
     "HOST": "cacher",
     "PORT": "6379",

@@ -10,7 +10,7 @@ const checkShortenedRoute = (
 
   if (!url?.trim()) {
     throw new HTTP400Error('Missing URL parameter')
-  } else if (/[a-zA-Z]/.test(url) && /\d/.test(url)) {
+  } else if ((/[a-zA-Z]/.test(url) || /\d/.test(url)) && url.length === 7) {
     next()
   } else {
     throw new HTTP400Error('Invalid URL parameter')

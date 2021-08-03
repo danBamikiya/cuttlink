@@ -1,0 +1,10 @@
+{
+  "SERVER": {
+    "API_URL": "API_URL"
+  },
+  "BASE_URL": "BASE_URL",
+  "SENTRY_DSN": "SENTRY_DSN",
+  "REDIS_URL": {
+    "BASE_URL": "REDIS_URL"
+  }
+}

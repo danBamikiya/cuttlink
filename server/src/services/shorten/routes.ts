@@ -16,14 +16,22 @@ export default [
     handler: [
       checkShortenedRoute,
       async ({ params }: Request, res: Response, next: NextFunction) => {
-        const { url } = params
+        const { urlCode } = params
         try {
-          const result = await getFromCache(url)
-          result
-            ? res.status(200).send(result)
-            : (() => {
-                throw new HTTP404Error('Invalid url')
-              })()
+          const result = await getFromCache(urlCode)
+          if (result) {
+            const response = {
+              status: 200,
+              message: {
+                long_url: result,
+                short_url: `${BASE_URL}/${urlCode}`
+              }
+            }
+
+            res.status(200).send(response)
+          } else {
+            throw new HTTP404Error('Invalid url')
+          }
         } catch (error) {
           next(error)
         }
@@ -37,8 +45,17 @@ export default [
       checkShortenerParams,
       validate,
       async ({ body }: Request, res: Response) => {
-        const result = await getShortenedURL(body.url as string)
-        res.status(200).send(`${BASE_URL}/${result}`)
+        const { longUrl } = body.url
+        const result = await getShortenedURL(longUrl as string)
+
+        const response = {
+          status: 200,
+          message: {
+            long_url: longUrl,
+            short_url: `${BASE_URL}/${result}`
+          }
+        }
+        res.status(200).send(response)
       }
     ]
   }

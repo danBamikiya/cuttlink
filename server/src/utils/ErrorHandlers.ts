@@ -14,7 +14,12 @@ const clientError = (err: Error, res: Response, next: NextFunction) => {
   if (err instanceof HTTPClientError) {
     const { message, statusCode } = err
     logger.warn({ message })
-    res.status(statusCode).send(message)
+
+    const response = {
+      status: statusCode,
+      message: message
+    }
+    res.status(statusCode).send(response)
   } else {
     next(err)
   }
@@ -24,13 +29,15 @@ const serverError = (err: Error, res: Response, next: NextFunction) => {
   const { stack, message } = err
   logger.error({ message })
 
-  res
-    .status(500)
-    .send(
+  const response = {
+    status: 500,
+    message:
       process.env.NODE_ENV === 'production'
         ? 'Internal Server Error ☹☹☹'
         : stack
-    )
+  }
+
+  res.status(500).send(response)
 }
 
 export { notFoundError, clientError, serverError }

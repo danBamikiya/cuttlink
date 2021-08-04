@@ -11,7 +11,7 @@ import { BASE_URL } from '../../config/common'
 
 export default [
   {
-    path: '/:url',
+    path: '/:urlCode',
     method: 'get',
     handler: [
       checkShortenedRoute,
@@ -45,7 +45,7 @@ export default [
       checkShortenerParams,
       validate,
       async ({ body }: Request, res: Response) => {
-        const { longUrl } = body.url
+        const longUrl = body.url
         const result = await getShortenedURL(longUrl as string)
 
         const response = {

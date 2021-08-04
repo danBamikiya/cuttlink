@@ -6,11 +6,14 @@ const checkShortenedRoute = (
   res: Response,
   next: NextFunction
 ) => {
-  const { url } = req.params
+  const { urlCode } = req.params
 
-  if (!url?.trim()) {
+  if (!urlCode?.trim()) {
     throw new HTTP400Error('Missing URL parameter')
-  } else if ((/[a-zA-Z]/.test(url) || /\d/.test(url)) && url.length === 7) {
+  } else if (
+    (/[a-zA-Z]/.test(urlCode) || /\d/.test(urlCode)) &&
+    urlCode.length === 7
+  ) {
     next()
   } else {
     throw new HTTP400Error('Invalid URL parameter')

@@ -36,7 +36,7 @@ export class ShortenerComponent implements OnInit {
   shortenLongUrl(): void {
     const data = { url: this.longURL }
     this.shortenService.shortenUrl(data).subscribe(response => {
-      this.shortURL = response.message.redirect_url
+      this.shortURL = response.message.short_url
       console.log(response)
     })
   }

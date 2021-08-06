@@ -1,7 +1,6 @@
 interface ShortenerMsg {
   long_url: string
   short_url: string
-  redirect_url?: string
 }
 
 interface Response {

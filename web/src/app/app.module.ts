@@ -8,7 +8,8 @@ import { AppComponent } from './app.component'
 import { HeaderComponent } from './components/layout/header/header.component'
 import { ShortenerComponent } from './components/shortener/shortener.component'
 
-import { ClipboardModule } from 'ngx-clipboard'
+import { ClipboardModule } from 'ngx-clipboard';
+import { AppRoutingModule } from './app-routing.module'
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ShortenerComponent],
@@ -17,7 +18,8 @@ import { ClipboardModule } from 'ngx-clipboard'
     MatIconModule,
     FormsModule,
     ClipboardModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,13 +6,19 @@ import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component'
 import { HeaderComponent } from './components/layout/header/header.component'
+import { HomeMainComponent } from './components/layout/home-main/home-main.component'
 import { ShortenerComponent } from './components/shortener/shortener.component'
 
-import { ClipboardModule } from 'ngx-clipboard';
+import { ClipboardModule } from 'ngx-clipboard'
 import { AppRoutingModule } from './app-routing.module'
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ShortenerComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    HomeMainComponent,
+    ShortenerComponent
+  ],
   imports: [
     BrowserModule,
     MatIconModule,

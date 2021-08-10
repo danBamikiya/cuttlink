@@ -20,8 +20,8 @@ The services are accessed via standard HTTPS requests in UTF-8 format to an API 
 
 | METHOD | ACTION                   |
 | ------ | ------------------------ |
-| GET    | Redirects shortened link |
-| POST   | Creates shortened link   |
+| GET    | Fetch shortened link |
+| POST   | Create and fetch shortened link   |
 
 <h2 id="rate-limit">Rate Limiting</h2>
 

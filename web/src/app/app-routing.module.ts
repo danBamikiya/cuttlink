@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { HomeComponent } from './components/layout/home/home.component'
-import { HomePageMatcher } from './utils/home-page-matcher'
 
 const routes: Routes = [
   {
-    matcher: HomePageMatcher,
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: ':urlCode',
     component: HomeComponent
   }
 ]

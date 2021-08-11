@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component'
 import { HeaderComponent } from './components/layout/header/header.component'
-import { HomeMainComponent } from './components/layout/home-main/home-main.component'
+import { HomeComponent } from './components/layout/home/home.component'
 import { ShortenerComponent } from './components/shortener/shortener.component'
 
 import { ClipboardModule } from 'ngx-clipboard'
@@ -16,7 +16,7 @@ import { AppRoutingModule } from './app-routing.module'
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeMainComponent,
+    HomeComponent,
     ShortenerComponent
   ],
   imports: [

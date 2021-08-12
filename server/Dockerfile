@@ -33,6 +33,6 @@ COPY --from=nginx:1.18-alpine /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/d
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 # remove default nginx configuration
 RUN rm /etc/nginx/conf.d/default.conf
-EXPOSE 80
+EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"]

@@ -6,7 +6,7 @@ services:
       context: web
       target: ui-dev
     ports:
-      - 4200:4200
+      - '4200:4200'
     networks:
       - public
     depends_on:
@@ -19,9 +19,11 @@ services:
   server:
     build:
       context: server
-      target: server-dev
+      args:
+        STAGE: dev
+      target: server
     ports:
-      - 3000:3000
+      - '3000:80'
     networks:
       - public
     depends_on:
@@ -35,7 +37,7 @@ services:
     image: redis
     command: ['redis-server', '/usr/local/etc/redis/redis.conf']
     ports:
-      - 6379:6379
+      - '6379:6379'
     networks:
       - public
     volumes:

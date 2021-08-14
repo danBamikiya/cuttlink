@@ -14,9 +14,10 @@ services:
   server:
     build:
       context: server
-      args:
-        STAGE: build
-      target: server
+      target: server-build
+    restart: always
+
+  server-proxy:
     restart: always
 
   cacher:

@@ -19,11 +19,9 @@ services:
   server:
     build:
       context: server
-      args:
-        STAGE: dev
-      target: server
+      target: server-dev
     ports:
-      - '8080:8080'
+      - '3000:3000'
     networks:
       - public
     depends_on:
@@ -31,8 +29,21 @@ services:
     volumes:
       - ./server/:/app
       - servernodemodules:/app/node_modules
-      - ./server/nginx/nginx.conf:/etc/nginx/nginx.conf
     container_name: cuttlink_server
+
+  server-proxy:
+    build:
+      context: server
+      dockerfile: nginx/Dockerfile
+    ports:
+      - '8080:8080'
+    networks:
+      - public
+    depends_on:
+      - server
+    volumes:
+      - ./server/nginx/nginx.conf:/etc/nginx/nginx.conf
+    container_name: cuttlink_server_proxy
 
   cacher:
     image: redis

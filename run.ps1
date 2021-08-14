@@ -83,8 +83,6 @@ switch ($Args[0]) {
         exit
     }
     'Start' {
-        Set-Item -Path Env:DOCKER_BUILDKIT -Value 1
-        Set-Item -Path Env:COMPOSE_DOCKER_CLI_BUILD -Value 1
         Start-Services;
         exit
     }
@@ -106,14 +104,10 @@ switch ($Args[0]) {
         exit
     }
     'Rebuild-Service' {
-        Set-Item -Path Env:DOCKER_BUILDKIT -Value 1
-        Set-Item -Path Env:COMPOSE_DOCKER_CLI_BUILD -Value 1
         Rebuild-Service $($Args | Select-Object -Skip 1);
         exit
     }
     'Build' {
-        Set-Item -Path Env:DOCKER_BUILDKIT -Value 1
-        Set-Item -Path Env:COMPOSE_DOCKER_CLI_BUILD -Value 1
         Build-Services;
         exit
     }

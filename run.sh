@@ -86,8 +86,6 @@ ls)
     exit
     ;;
 start)
-    export COMPOSE_DOCKER_CLI_BUILD=1
-    export DOCKER_BUILDKIT=1
     start_services
     exit
     ;;
@@ -104,14 +102,10 @@ stop_service)
     exit
     ;;
 rebuild_service)
-    export COMPOSE_DOCKER_CLI_BUILD=1
-    export DOCKER_BUILDKIT=1
     "$@"
     exit
     ;;
 build)
-    export COMPOSE_DOCKER_CLI_BUILD=1
-    export DOCKER_BUILDKIT=1
     build_services
     exit
     ;;

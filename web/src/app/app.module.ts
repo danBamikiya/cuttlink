@@ -8,6 +8,7 @@ import { AppComponent } from './app.component'
 import { HeaderComponent } from './components/layout/header/header.component'
 import { HomeComponent } from './components/layout/home/home.component'
 import { ShortenerComponent } from './components/shortener/shortener.component'
+import { RedirectComponent } from './components/redirect/redirect.component'
 
 import { ClipboardModule } from 'ngx-clipboard'
 import { AppRoutingModule } from './app-routing.module'
@@ -17,7 +18,8 @@ import { AppRoutingModule } from './app-routing.module'
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    ShortenerComponent
+    ShortenerComponent,
+    RedirectComponent
   ],
   imports: [
     BrowserModule,

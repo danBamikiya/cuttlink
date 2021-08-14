@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { HomeComponent } from './components/layout/home/home.component'
+import { RedirectComponent } from './components/redirect/redirect.component'
 
 const routes: Routes = [
   {
@@ -9,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: ':urlCode',
-    component: HomeComponent
+    component: RedirectComponent
   }
 ]
 

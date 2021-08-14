@@ -24,6 +24,10 @@ export class ShortenerService {
   }
 
   shortenUrl(longUrl: Url): Observable<Response> {
-    return this.http.post<Response>(this.cuttlinkAPI, longUrl, HttpOptions)
+    return this.http.post<Response>(
+      `${this.cuttlinkAPI}/api/url`,
+      longUrl,
+      HttpOptions
+    )
   }
 }

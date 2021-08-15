@@ -11,8 +11,17 @@ function Stop-Services {
 }
 
 function Teardown-Services {
-    Write-Host "Tearing down all cuttlink services (containers, networks, volumes)...`n" -f yellow
-    docker-compose down -v
+    param(
+        [switch]$RMI = $false
+    )
+
+    if ($RMI) {
+        Write-Host "Tearing down all cuttlink services (containers, networks, volumes, 'local' images)...`n" -f yellow
+        docker-compose down --rmi 'local' -v --remove-orphans
+    } else {
+        Write-Host "Tearing down all cuttlink services (containers, networks, volumes)...`n" -f yellow
+        docker-compose down -v --remove-orphans
+    }
 }
 
 function Stop-Service {
@@ -90,8 +99,13 @@ switch ($Args[0]) {
         Stop-Services;
         exit
     }
-    'Teardown' {
-        Teardown-Services;
+    'Teardown-Services' {
+        if ($($Args | Select-Object -Skip 1).Count -gt 1) {
+            Write-Error -Message "This command requires not more than 1 argument." -Category InvalidArgument
+            Write-Host "Please set the correct number of arguments and try again." -f yellow
+        } else {
+            Invoke-Expression "$($Args)"
+        }
         exit
     }
     'Stop-Service' {

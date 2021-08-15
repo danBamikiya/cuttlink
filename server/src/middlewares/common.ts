@@ -13,8 +13,8 @@ const handleBodyRequestParsing = (router: Router) => {
 }
 
 // compress all responses
-export const handleCompression = (router: Router) => {
+const handleCompression = (router: Router) => {
   router.use(compression())
 }
 
-export { handleCors, handleBodyRequestParsing }
+export { handleCors, handleBodyRequestParsing, handleCompression }

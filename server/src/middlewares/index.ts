@@ -1,12 +1,23 @@
-import { handleCors, handleBodyRequestParsing } from './common'
+import {
+  handleCors,
+  handleBodyRequestParsing,
+  handleCompression
+} from './common'
 
-import handleHTTPHeaders from './security'
+import {
+  handleRateLimit,
+  handleJSONBodyLimit,
+  handleHTTPHeaders
+} from './security'
 
 import handleLogging from './logging'
 
 export default [
   handleCors,
   handleBodyRequestParsing,
+  handleJSONBodyLimit,
   handleHTTPHeaders,
-  handleLogging
+  handleLogging,
+  handleCompression,
+  handleRateLimit
 ]

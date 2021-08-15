@@ -39,7 +39,7 @@ export default [
     ]
   },
   {
-    path: '/api/url',
+    path: '/shorten',
     method: 'post',
     handler: [
       checkShortenerParams,

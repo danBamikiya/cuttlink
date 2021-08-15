@@ -10,7 +10,7 @@ function Stop-Services {
     docker-compose stop
 }
 
-function Teardown-Services {
+function Teardown {
     param(
         [switch]$RMI = $false
     )
@@ -101,7 +101,7 @@ switch ($Args[0]) {
         Stop-Services;
         exit
     }
-    'Teardown-Services' {
+    'Teardown' {
         if ($($Args | Select-Object -Skip 1).Count -gt 1) {
             Write-Error -Message "This command requires not more than 1 argument." -Category InvalidArgument
             Write-Host "Please set the correct number of arguments and try again." -f yellow

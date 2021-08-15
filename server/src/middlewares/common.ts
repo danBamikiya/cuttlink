@@ -3,7 +3,9 @@ import compression from 'compression'
 import cors from 'cors'
 
 const handleCors = (router: Router) =>
-  router.use(cors({ credentials: true, origin: true }))
+  router.use(
+    cors({ credentials: true, methods: [ 'GET', 'POST' ], origin: true })
+  )
 
 const handleBodyRequestParsing = (router: Router) => {
   router.use(urlencoded({ extended: true }))

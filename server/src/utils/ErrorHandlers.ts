@@ -27,7 +27,7 @@ const clientError = (err: Error, res: Response, next: NextFunction) => {
 
 const serverError = (err: Error, res: Response, next: NextFunction) => {
   const { stack, message } = err
-  logger.error({ message })
+  logger.error({ message, stack })
 
   const response = {
     status: 500,

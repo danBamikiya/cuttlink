@@ -8,28 +8,22 @@ import { ShortenerService } from '../../services/shortener.service'
   template: 'redirecting...'
 })
 export class RedirectComponent implements OnInit {
-  urlcode$!: string | undefined
-
   constructor(
     private route: ActivatedRoute,
     private shortenService: ShortenerService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.route.paramMap
       .pipe(map((params: ParamMap) => params.get('urlCode')))
       .subscribe(urlcode => {
         if (urlcode) {
-          this.urlcode$ = urlcode
+          this.shortenService.getLongUrl(urlcode).subscribe(response => {
+            if (response.status === 200) {
+              window.location.href = response.message.long_url
+            }
+          })
         }
       })
-  }
-
-  ngOnInit(): void {
-    if (this.urlcode$) {
-      this.shortenService.getLongUrl(this.urlcode$).subscribe(response => {
-        if (response.status === 200) {
-          window.location.href = response.message.long_url
-        }
-      })
-    }
   }
 }

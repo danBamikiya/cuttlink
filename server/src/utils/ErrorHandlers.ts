@@ -13,7 +13,7 @@ const notFoundError = () => {
 const clientError = (err: Error, res: Response, next: NextFunction) => {
   if (err instanceof HTTPClientError) {
     const { message, statusCode } = err
-    logger.warn({ message })
+    logger.debug({ message })
 
     const response = {
       status: statusCode,

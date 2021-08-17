@@ -20,8 +20,13 @@ stop_services() {
 }
 
 teardown_services() {
-    printf "${BYELLOW}Tearing down all cuttlink services (containers, networks, volumes)...${NC}\n\n"
-    docker-compose down -v
+    if [ -n "$2" ] && [ "$(echo "$2" | sed 's/RMI=//')" = "true" ]; then
+        printf "${BYELLOW}Tearing down all cuttlink services (containers, networks, volumes, 'local' images)...${NC}\n\n"
+        docker-compose down --rmi 'local' -v --remove-orphans
+    else
+        printf "${BYELLOW}Tearing down all cuttlink services (containers, networks, volumes)...${NC}\n\n"
+        docker-compose down -v --remove-orphans
+    fi
 }
 
 stop_service() {
@@ -96,7 +101,7 @@ stop)
     exit
     ;;
 teardown)
-    teardown_services
+    teardown_services "$@"
     exit
     ;;
 stop_service)
@@ -125,9 +130,9 @@ exec_into)
     ;;
 *)
     if [ -n "$1" ]; then
-        echo "${CYAN}$1${NC} ${RED}is not a supported command.${NC}"
+        printf "${CYAN}$1${NC} ${RED}is not a supported command.${NC}\n"
     else
-        echo "${RED}Please specify a command.${NC}"
+        printf "${RED}Please specify a command.${NC}\n"
     fi
     exit 1
     ;;

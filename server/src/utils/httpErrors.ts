@@ -50,11 +50,20 @@ class HTTP413Error extends HTTPClientError {
   }
 }
 
+class HTTP429Error extends HTTPClientError {
+  readonly statusCode = 429
+
+  constructor(message: string | object = 'Too many requests') {
+    super(message)
+  }
+}
+
 export {
   HTTPClientError,
   HTTP400Error,
   HTTP401Error,
   HTTP403Error,
   HTTP404Error,
-  HTTP413Error
+  HTTP413Error,
+  HTTP429Error
 }

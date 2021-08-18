@@ -4,11 +4,10 @@ import { applyMiddlewares, applyRoutes } from './utils'
 import middleware from './middlewares'
 import errorHandlers from './middlewares/errorHandlers'
 import routes from './services'
-import initDependencies from './config'
 import logger from './config/logger'
 
 process.on('uncaughtException', e => {
-  logger.error({
+  logger.emerg({
     message: 'uncaughtException',
     extra: e
   })
@@ -16,7 +15,7 @@ process.on('uncaughtException', e => {
 })
 
 process.on('unhandledRejection', e => {
-  logger.error({
+  logger.emerg({
     message: 'unhandledRejection',
     extra: e
   })
@@ -31,8 +30,7 @@ applyMiddlewares(errorHandlers, router)
 const { PORT = 3000 } = process.env
 const server = http.createServer(router)
 
-async function start() {
-  await initDependencies()
+function start() {
   server.listen(PORT, () =>
     logger.info({
       message: `Server running in ${process.env.NODE_ENV} mode on http://localhost:${PORT}...`

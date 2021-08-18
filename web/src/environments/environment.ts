@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://8080-magenta-camel-dcys2luy.ws-eu14.gitpod.io'
+  API_URL: 'http://localhost:8080'
 }
 
 /*

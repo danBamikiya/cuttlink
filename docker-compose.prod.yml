@@ -22,3 +22,10 @@ services:
 
   cacher:
     restart: always
+
+  database:
+    env_file:
+      - .env.prod
+    restart: unless-stopped
+
+  database-admin:

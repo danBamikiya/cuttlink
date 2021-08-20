@@ -5,6 +5,7 @@ services:
     build:
       context: web
       target: ui-dev
+    hostname: web
     ports:
       - '4200:4200'
     networks:
@@ -22,6 +23,7 @@ services:
     build:
       context: server
       target: server-dev
+    hostname: server
     ports:
       - '3000:3000'
     networks:
@@ -40,6 +42,7 @@ services:
     build:
       context: server
       dockerfile: nginx/Dockerfile
+    hostname: server-proxy
     ports:
       - '8080:8080'
     networks:
@@ -55,6 +58,7 @@ services:
   cacher:
     build:
       context: redis
+    hostname: cacher
     ports:
       - '6379:6379'
     networks:
@@ -68,6 +72,7 @@ services:
 
   database:
     image: postgres:13-alpine
+    hostname: pgdb
     ports:
       - '5432:5432'
     networks:
@@ -83,6 +88,7 @@ services:
 
   database-admin:
     image: dpage/pgadmin4
+    hostname: pgadmin
     ports:
       - '5050:80'
     networks:

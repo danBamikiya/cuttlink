@@ -82,6 +82,7 @@ services:
       cuttlink.description: 'Postgres Database'
     volumes:
       - postgres-data:/var/lib/postgresql/data
+      - ./database/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     env_file:
       - .env
     container_name: pg_database

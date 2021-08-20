@@ -36,6 +36,9 @@ services:
     volumes:
       - ./server/:/app
       - servernodemodules:/app/node_modules
+    environment:
+      WAIT_HOSTS: pgdb:5432, pgadmin:80
+      WAIT_LOGGER_LEVEL: debug
     container_name: cuttlink_server
 
   server-proxy:

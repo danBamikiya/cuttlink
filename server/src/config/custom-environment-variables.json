@@ -6,5 +6,10 @@
   "SENTRY_DSN": "SENTRY_DSN",
   "REDIS_URL": {
     "BASE_URL": "REDIS_URL"
+  },
+  "POSTGRES": {
+    "USER": "POSTGRES_USER",
+    "PASSWORD": "POSTGRES_PASSWORD",
+    "BASE_URL": "POSTGRES_URL"
   }
 }

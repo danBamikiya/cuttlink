@@ -15,6 +15,10 @@ services:
     build:
       context: server
       target: server-build
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_URL
     restart: always
 
   server-proxy:
@@ -24,8 +28,10 @@ services:
     restart: always
 
   database:
-    env_file:
-      - .env.prod
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
     restart: unless-stopped
 
   database-admin:

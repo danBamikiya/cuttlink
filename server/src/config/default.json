@@ -10,5 +10,11 @@
     "HOST": "cacher",
     "PORT": "6379",
     "BASE_URL": "redis://cacher:6379"
+  },
+  "POSTGRES": {
+    "USER": "postgres",
+    "PASSWORD": "changeme",
+    "// BASE_URL": "postgres://user:password@containerhostname:containerport/dbname",
+    "BASE_URL": "postgres://postgres:changeme@pgdb:5432/cuttlink"
   }
 }

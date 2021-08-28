@@ -59,6 +59,7 @@ list_services() {
 }
 
 build_services() {
+    teardown_services RMI=true
     printf "${BBLUE}Creating and starting cuttlink production services...${NC}\n\n"
     docker-compose -f docker-compose.yml docker-compose.prod.yml up --build -d
     docker-compose logs -f

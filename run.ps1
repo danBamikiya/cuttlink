@@ -16,7 +16,7 @@ function Teardown {
     )
 
     if ($RMI) {
-        Write-Host "Tearing down all cuttlink services (containers, networks, volumes, 'local' images)...`n" -f yellow
+        Write-Host "Tearing down all cuttlink services (containers, networks, volumes, built images)...`n" -f yellow
         docker-compose down --rmi 'local' -v --remove-orphans
     } else {
         Write-Host "Tearing down all cuttlink services (containers, networks, volumes)...`n" -f yellow

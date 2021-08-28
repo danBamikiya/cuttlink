@@ -21,7 +21,7 @@ stop_services() {
 
 teardown_services() {
     if [ -n "$2" ] && [ "$(echo "$2" | sed 's/RMI=//')" = "true" ]; then
-        printf "${BYELLOW}Tearing down all cuttlink services (containers, networks, volumes, 'local' images)...${NC}\n\n"
+        printf "${BYELLOW}Tearing down all cuttlink services (containers, networks, volumes, built images)...${NC}\n\n"
         docker-compose down --rmi 'local' -v --remove-orphans
     else
         printf "${BYELLOW}Tearing down all cuttlink services (containers, networks, volumes)...${NC}\n\n"

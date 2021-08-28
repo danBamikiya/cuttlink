@@ -54,7 +54,7 @@ function Rebuild-Service {
 
 function List-Services {
     Write-Host "Listing all services...`n" -f blue
-    docker-compose ps -a
+    docker-compose ps --services
 }
 
 function Build-Services {

@@ -5,3 +5,4 @@
 *.yml text=auto eol=lf
 *.sh text=auto eol=lf
 *.ps1 text=auto eol=crlf
+*.sql text=auto eol=lf

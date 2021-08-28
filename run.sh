@@ -55,7 +55,7 @@ rebuild_service() {
 
 list_services() {
     printf "${BBLUE}Listing all services...${NC}\n\n"
-    docker-compose ps -a
+    docker-compose ps --services
 }
 
 build_services() {

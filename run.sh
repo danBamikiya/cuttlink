@@ -21,7 +21,7 @@ stop_services() {
 
 teardown_services() {
     if [ -n "$2" ] && [ "$(echo "$2" | sed 's/RMI=//')" = "true" ]; then
-        printf "${BYELLOW}Tearing down all cuttlink services (containers, networks, volumes, 'local' images)...${NC}\n\n"
+        printf "${BYELLOW}Tearing down all cuttlink services (containers, networks, volumes, built images)...${NC}\n\n"
         docker-compose down --rmi 'local' -v --remove-orphans
     else
         printf "${BYELLOW}Tearing down all cuttlink services (containers, networks, volumes)...${NC}\n\n"
@@ -55,13 +55,13 @@ rebuild_service() {
 
 list_services() {
     printf "${BBLUE}Listing all services...${NC}\n\n"
-    docker-compose ps -a
+    docker-compose ps --services
 }
 
 build_services() {
+    teardown_services RMI=true
     printf "${BBLUE}Creating and starting cuttlink production services...${NC}\n\n"
-    docker-compose build
-    docker-compose up -f docker-compose.yml docker-compose.prod.yml -d
+    docker-compose -f docker-compose.yml docker-compose.prod.yml up --build -d
     docker-compose logs -f
 }
 

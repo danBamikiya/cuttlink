@@ -16,7 +16,7 @@ function Teardown {
     )
 
     if ($RMI) {
-        Write-Host "Tearing down all cuttlink services (containers, networks, volumes, 'local' images)...`n" -f yellow
+        Write-Host "Tearing down all cuttlink services (containers, networks, volumes, built images)...`n" -f yellow
         docker-compose down --rmi 'local' -v --remove-orphans
     } else {
         Write-Host "Tearing down all cuttlink services (containers, networks, volumes)...`n" -f yellow
@@ -54,13 +54,13 @@ function Rebuild-Service {
 
 function List-Services {
     Write-Host "Listing all services...`n" -f blue
-    docker-compose ps -a
+    docker-compose ps --services
 }
 
 function Build-Services {
+    Teardown -RMI
     Write-Host "Creating and starting cuttlink production services...`n" -f blue
-    docker-compose build
-    docker-compose up -f docker-compose.yml docker-compose.prod.yml -d
+    docker-compose -f docker-compose.yml docker-compose.prod.yml up --build -d
     docker-compose logs -f
 }
 

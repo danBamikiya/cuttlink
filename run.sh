@@ -60,8 +60,7 @@ list_services() {
 
 build_services() {
     printf "${BBLUE}Creating and starting cuttlink production services...${NC}\n\n"
-    docker-compose build
-    docker-compose up -f docker-compose.yml docker-compose.prod.yml -d
+    docker-compose -f docker-compose.yml docker-compose.prod.yml up --build -d
     docker-compose logs -f
 }
 

@@ -34,7 +34,7 @@ All commands are run from the root of the project, from a terminal:
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 ```
 
-> The command above will [enable](https:/go.microsoft.com/fwlink/?LinkID=135170) the PowerShell script to run in your **current** PowerShell terminal without your terminal throwing a security error.
+> The command above will [enable](https://go.microsoft.com/fwlink/?LinkID=135170) the PowerShell script to run in your **current** PowerShell terminal without your terminal throwing a security error.
 
 For Linux/MacOS users, you might need to enable the Shell script run like so:
 

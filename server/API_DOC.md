@@ -27,7 +27,7 @@ Rate Limiting enables Cuttlink API to share access bandwidth to its resources eq
 
 Rate limiting is applied as per user based on the user's IP, and allows a maximum of 100 requests per 3 mins.
 
-**Note**: If Web API returns **status code 429**, it means that you have sent too many requests. When this happens, check the `Retry-After` header, where you will see a number displayed. This is the number of _seconds that you need to wait_, before you try your request again.
+**Note**: If Cuttlink API returns **status code 429**, it means that you have sent too many requests. When this happens, check the `Retry-After` header, where you will see a number displayed. This is the number of _seconds that you need to wait_, before you try your request again.
 
 <h2>Responses</h2>
 
@@ -47,7 +47,7 @@ Here is an example of a response from a successful request to shorten a long url
 
 <h2 id="response-status-codes">Response Status Codes</h2>
 
-Web API uses the following response status codes, as defined in the [RFC 2616](https://www.ietf.org/rfc/rfc2616.txt) and [RFC 6585](https://www.ietf.org/rfc/rfc6585.txt):
+Cuttlink API uses the following response status codes, as defined in the [RFC 2616](https://www.ietf.org/rfc/rfc2616.txt) and [RFC 6585](https://www.ietf.org/rfc/rfc6585.txt):
 
 | STATUS CODE | DESCRIPTION                                                                                                                                                                                                                                       |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

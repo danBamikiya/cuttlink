@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { ShortenerService } from '../../services/shortener.service'
+import { getRedirectUrl } from 'src/app/utils/getRedirectUrl'
 
 @Component({
   selector: 'app-shortener',
@@ -36,7 +37,7 @@ export class ShortenerComponent implements OnInit {
   shortenLongUrl(): void {
     const data = { url: this.longURL }
     this.shortenService.shortenUrl(data).subscribe(response => {
-      this.shortURL = response.message.short_url
+      this.shortURL = getRedirectUrl(response.message.short_url)
     })
   }
 

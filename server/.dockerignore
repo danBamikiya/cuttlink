@@ -1,4 +1,5 @@
 node_modules/
+terraform/
 build/
 src/config/local.json
 src/config/production.json

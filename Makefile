@@ -23,6 +23,7 @@ scan-image: check-dir
 
 .PHONY: build
 build:
+	export COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 && \
 	docker-compose -f docker-compose.yml docker-compose.prod.yml build --force-rm
 
 .PHONY: rm-build

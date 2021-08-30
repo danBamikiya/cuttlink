@@ -26,8 +26,8 @@ build:
 	docker-compose -f docker-compose.yml docker-compose.prod.yml build --force-rm
 
 .PHONY: rm-build
-rebuild-image:
-	docker-compose -f docker-compose.yml docker-compose.prod.yml rm -f -v
+rm-build:
+	docker-compose -f docker-compose.yml docker-compose.prod.yml down --rmi 'all' -v --remove-orphans
 
 .PHONY: terraform-create-workspace
 terraform-create-workspace: check-dir check-env

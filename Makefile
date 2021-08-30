@@ -2,6 +2,7 @@
 $(if $(findstring /,$(MAKEFILE_LIST)),$(error Please only invoke this makefile from the directory it resides in))
 
 LOGFILE=$(shell date +'%y-%m-%d-%H:%M:%S')
+PROJECT_ID=cuttlink
 DIR?=
 IMAGE?=
 ENV?=
@@ -29,6 +30,10 @@ build:
 .PHONY: rm-build
 rm-build:
 	docker-compose -f docker-compose.yml docker-compose.prod.yml down --rmi 'all' -v --remove-orphans
+
+.PHONY: create-tf-backend-bucket
+create-tf-backend-bucket:
+	gsutil mb -p $(PROJECT_ID) gs://$(PROJECT_ID)-terraform
 
 .PHONY: terraform-create-workspace
 terraform-create-workspace: check-dir check-env

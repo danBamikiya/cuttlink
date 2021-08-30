@@ -27,7 +27,7 @@
 - [`nginx`](https://github.com/danBamikiya/cuttlink/tree/nginx) - where I implemented an NGINX reverse proxy for the NodeJS server and an NGINX web server to serve bundled Angular code in production
 - [`db`](https://github.com/danBamikiya/cuttlink/tree/db) - where I'm currently implementing a PostgreSQL database for the app and a PostgreSQL admin database for management in the dev environment
 - [`docs-changes`](https://github.com/danBamikiya/cuttlink/tree/docs-changes) - where adding, fixing and improvement of documentations happen
-- [`infrastructure`](https://github.com/danBamikiya/cuttlink/tree/dev-fixes) -
+- [`infrastructure`](https://github.com/danBamikiya/cuttlink/tree/infrastructure) -
   - where I'll be writing Kubernetes configurations for containers orchestration
   - where I'll be using Terraform as Infrastructure as Code for provisioning cloud services for a staging and production environment
 

@@ -78,6 +78,10 @@ Docker with Docker Compose
 
 Terraform
 
+#### Scripting
+
+Shell script · PowerShell
+
 ## 🚴 How To Run
 
 See [HOW_TO_RUN.md](./HOW_TO_RUN.md)

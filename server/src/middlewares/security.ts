@@ -2,8 +2,9 @@ import express, { Router } from 'express'
 import rateLimit from 'express-rate-limit'
 import RedisStore from 'rate-limit-redis'
 import helmet from 'helmet'
-import { redisClient } from '../config/cache'
 import { HTTP429Error } from '../utils/httpErrors'
+import { REDIS_BASE_URL as REDIS_URL } from '../config/common'
+import { createRedisClient } from '../config/cache'
 
 const isProduction = process.env.NODE_ENV === 'production'
 const EXPIRES_IN_AS_SECONDS = 3 * 60
@@ -20,9 +21,10 @@ const handleRateLimit = (router: Router) => {
     },
     // the storage to use when persisting rate limit attempts
     store: new RedisStore({
-      client: redisClient,
+      client: createRedisClient({ url: REDIS_URL, name: 'rate-limit' }),
       // 3 mins in `s` (or practically unlimited outside production)
       expiry: isProduction ? EXPIRES_IN_AS_SECONDS : 1,
+      // prefix to add to entries in Redis
       prefix: 'rl:',
       // @ts-ignore
       // If Redis is not connected, let the request succeed as failover

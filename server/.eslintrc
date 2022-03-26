@@ -5,6 +5,9 @@
     "es2021": true,
     "node": true
   },
+  "globals": {
+    "NodeJS": true
+  },
   "extends": ["standard"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

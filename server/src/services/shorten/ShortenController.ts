@@ -5,6 +5,6 @@ export default async function getShortenedURL(url: string) {
   const random = new Random()
   const urlCode = random.randomsum()
 
-  redisClient.setex(urlCode, 3600, url)
+  redisClient!.setex(urlCode, 3600, url)
   return urlCode
 }

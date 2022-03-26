@@ -14,4 +14,13 @@ interface Route {
   handler: Handler | Handler[]
 }
 
-export { Wrapper, Route }
+interface ErrorWithCode extends Error {
+  code?: string
+}
+
+type InitOptions = {
+  url?: string
+  name?: string
+}
+
+export { Wrapper, Route, ErrorWithCode, InitOptions }
